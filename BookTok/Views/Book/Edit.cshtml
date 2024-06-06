@@ -30,7 +30,25 @@
             </div>
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
-                <input asp-for="Genre" class="form-control" />
+                <select onchange="changeName()" class="form-control" name="GenreSelect" id="GenreSelect">
+                    <option>Poetry</option>
+                    <option>Novel</option>
+                    <option>Fantasy</option>
+                    <option>Fiction</option>
+                    <option>Non-Fiction</option>
+                    <option>Mystery</option>
+                    <option>Thriller</option>
+                    <option>Suspense</option>
+                    <option>Horror</option>
+                    <option>Biography</option>
+                    <option>Autobiography</option>
+                    <option>Historical</option>
+                    <option>Self-help</option>
+                    <option>Storybook</option>
+                    <option>Encyclopedia</option>
+                    <option>Other</option>
+                </select>
+                <input asp-for="Genre" type="hidden" name="Genre" id="GenreData"/>
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -61,4 +79,14 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        GenreSelect.value = GenreData.value;
+
+        function changeName() {
+            const index = document.getElementById("GenreSelect").selectedIndex;
+            const text = document.getElementById("GenreSelect").options[index].text;
+            document.getElementById("GenreData").value=text
+        }
+    </script>
 }
