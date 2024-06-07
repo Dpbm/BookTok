@@ -1,0 +1,6 @@
+@BookTokApi_HostAddress = http://localhost:5298
+
+GET {{BookTokApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
