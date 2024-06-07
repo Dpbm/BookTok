@@ -17,6 +17,3 @@ sudo apt install -y dotnet-sdk-8.0 \
                     zlib1g
 sudo apt autoremove
 
-echo "Installing dotnet tools..."
-dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet tool install --global dotnet-ef
