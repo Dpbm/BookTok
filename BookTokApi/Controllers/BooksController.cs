@@ -23,14 +23,14 @@ namespace BookTokApi.Controllers
 
         // GET: api/Books
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        public async Task<ActionResult<IEnumerable<BookDTO>>> GetBooks()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Select(x => BookToDTO(x)).ToListAsync();
         }
 
         // GET: api/Books/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(int id)
+        public async Task<ActionResult<BookDTO>> GetBook(int id)
         {
             var book = await _context.Books.FindAsync(id);
 
@@ -39,7 +39,7 @@ namespace BookTokApi.Controllers
                 return NotFound();
             }
 
-            return book;
+            return BookToDTO(book);
         }
 
         // PUT: api/Books/5
@@ -104,5 +104,19 @@ namespace BookTokApi.Controllers
         {
             return _context.Books.Any(e => e.Id == id);
         }
+        private static BookDTO BookToDTO(Book book) =>
+        new BookDTO
+        {
+            Id = book.Id,
+            Title = book.Title,
+            Author = book.Author,
+            Year = book.Year,
+            Genre = book.Genre,
+            Publisher = book.Publisher,
+            Price = book.Price
+        };
+    
     }
+
+    
 }
