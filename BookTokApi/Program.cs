@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<BookContext>(opt =>
-    opt.UseInMemoryDatabase("Books"));
+builder.Services.AddDbContext<ReviewContext>(opt =>
+    opt.UseInMemoryDatabase("Reviews"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
