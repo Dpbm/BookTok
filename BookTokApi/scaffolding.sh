@@ -1,3 +1,3 @@
-#!/usr/bin/bash
+#!/bin/sh
 
-dotnet aspnet-codegenerator controller -name BooksController -async -api -m Book -dc BookContext -outDir Controllers
+dotnet aspnet-codegenerator controller -name ReviewsController -async -api -m Review -dc ReviewContext -outDir Controllers
