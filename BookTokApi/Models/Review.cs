@@ -8,7 +8,7 @@ public class Review
 
     public int Rating {get;set;}
 
-    public DateTime Date {get;set;}
+    public long Date {get;set;}
 
     public int CostumerId {get;set;}
 
