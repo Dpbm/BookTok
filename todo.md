@@ -1,5 +1,6 @@
 # TODO
 
+## Core
 - [x] remove `Home` link
 - [x] update all `Sales` routes
     - Sales Index
@@ -14,4 +15,10 @@
     - Sales Delete
         - [x] add `Costumer` and `Book` name
 
-- [ ] use http request to communicate with the api 
+- [x] use http request to communicate with the api 
+- [x] use dotenv
+
+## API
+- [x] set base url
+- [x] use dotenv
+- [ ] add get by book id

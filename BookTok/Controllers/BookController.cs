@@ -13,16 +13,26 @@ namespace BookTok.Controllers
     public class BookController : Controller
     {
         private readonly BookTokContext _context;
+        private readonly Reviews _reviews;
 
         public BookController(BookTokContext context)
         {
             _context = context;
+            _reviews = new Reviews();
         }
 
         // GET: Book
         public async Task<IActionResult> Index()
         {
             return View(await _context.Book.ToListAsync());
+        }
+
+        // GET: Book/Reviews/5
+        [HttpGet("/Reviews/{id}")]
+        public async Task<IActionResult> Reviews(int id)
+        {
+            _reviews.getBookReviews(id);
+            return View();
         }
 
         // GET: Book/Details/5

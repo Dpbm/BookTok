@@ -1,0 +1,15 @@
+{
+  "name": "BookTok",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dotnet:start": "concurrently \"dotnet watch --project ./BookTok/\" \"dotnet watch --project ./BookTokApi/\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

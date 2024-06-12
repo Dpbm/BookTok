@@ -1,4 +1,4 @@
-namespace BookTokApi.Models;
+namespace BookTok.Models;
 
 public class Review
 {
@@ -11,7 +11,6 @@ public class Review
     public long Date {get;set;}
 
     public int CostumerId {get;set;}
-    public int BookId {get;set;}
 
 
 }

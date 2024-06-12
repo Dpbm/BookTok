@@ -1,12 +1,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using BookTok.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BookTokContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookTokContext") ?? throw new InvalidOperationException("Connection string 'BookTokContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var root = Directory.GetCurrentDirectory();
+var dotenv = Path.Combine(root, ".env");
+EnvConfig.Load(dotenv);
+
+
 
 var app = builder.Build();
 

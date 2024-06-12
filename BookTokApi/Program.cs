@@ -1,6 +1,5 @@
 
 using Microsoft.EntityFrameworkCore;
-using BookTokApi.Models;
 using BookTokApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);

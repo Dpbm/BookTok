@@ -14,12 +14,16 @@ echo "$PURPLE---INSERT TEST---$RESET_COLOR"
 curl -v -s \
      --header "Content-Type: application/json" \
      --request POST \
-     --data '{"Id":1,"ReviewText":"Very good book!","Rating":5,"Date":1718192018625,"CostumerId":1}' \
+     --data '{"Id":1,"ReviewText":"Very good book!","Rating":5,"Date":1718192018625,"CostumerId":1,"BookId":10}' \
      "$BASE_URL/Reviews" | jq
 
 echo ""
 echo "$PURPLE---GET ALL TEST---$RESET_COLOR"
 curl -v -s "$BASE_URL/Reviews" | jq
+
+echo ""
+echo "$PURPLE---GET ALL BASED ON BOOK ID TEST---$RESET_COLOR"
+curl -v -s "$BASE_URL/Reviews/Book/10" | jq
 
 echo ""
 echo "$PURPLE---GET BY ID TEST---$RESET_COLOR"
