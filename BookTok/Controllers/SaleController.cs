@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookTok.Models;
+using System.Drawing.Printing;
+using System.Diagnostics;
 
 namespace BookTok.Controllers
 {
@@ -53,7 +55,7 @@ namespace BookTok.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Amount")] Sale sale)
+        public async Task<IActionResult> Create([Bind("Id,CostumerId,BookId")] Sale sale)
         {
             if (ModelState.IsValid)
             {
