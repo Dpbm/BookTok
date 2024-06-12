@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 echo "Installing system dependencies..."
 sudo apt update && sudo apt upgrade -y
