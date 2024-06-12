@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using BookTok.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BookTokContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookTokContext") ?? throw new InvalidOperationException("Connection string 'BookTokContext' not found.")));

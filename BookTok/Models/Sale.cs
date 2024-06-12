@@ -13,6 +13,5 @@ public class Sale
  
     
     public virtual Costumer Costumer {get; set;}
-
     public virtual Book Book {get;set;}
 }

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BookTok.Models;
 
+namespace BookTok.Data
+{
     public class BookTokContext : DbContext
     {
         public BookTokContext (DbContextOptions<BookTokContext> options)
@@ -13,8 +15,7 @@ using BookTok.Models;
         }
 
         public DbSet<BookTok.Models.Book> Book { get; set; } = default!;
-
-public DbSet<BookTok.Models.Costumer> Costumer { get; set; }
-
-public DbSet<BookTok.Models.Sale> Sale { get; set; }
+        public DbSet<BookTok.Models.Costumer> Costumer { get; set; } = default!;
+        public DbSet<BookTok.Models.Sale> Sale { get; set; } = default!;
     }
+}

@@ -13,12 +13,12 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                 <label asp-for="CostumerId" class="control-label"></label>
-                <input asp-for="CostumerId" class ="form-control" />
+                <label asp-for="CostumerId" class="control-label">Costumer</label>
+                <select asp-for="CostumerId" class ="form-control" asp-items="ViewBag.CostumerId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="BookId" class="control-label"></label>
-                <input asp-for="BookId" class ="form-control" />
+                <label asp-for="BookId" class="control-label">Book</label>
+                <select asp-for="BookId" class ="form-control" asp-items="ViewBag.BookId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -33,8 +33,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-    console.log(Costumer.Data)
-
-    </script>
 }

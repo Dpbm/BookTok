@@ -1,10 +1,10 @@
 @model IEnumerable<BookTok.Models.Sale>
 
 @{
-    ViewData["Title"] = "Sales";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Sales Index</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,6 +13,10 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Costumer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
             </th>
             <th></th>
         </tr>
@@ -21,6 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Costumer.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Author)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

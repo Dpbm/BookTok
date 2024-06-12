@@ -39,4 +39,5 @@ public class Book
     [Column(TypeName = "decimal(6, 2)")]
     [Required]
     public float Price {get;set;}
+
 }

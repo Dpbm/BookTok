@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using BookTok.Data;
 using BookTok.Models;
-using System.Drawing.Printing;
-using System.Diagnostics;
 
 namespace BookTok.Controllers
 {
@@ -23,7 +22,8 @@ namespace BookTok.Controllers
         // GET: Sale
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sale.ToListAsync());
+            var bookTokContext = _context.Sale.Include(s => s.Book).Include(s => s.Costumer);
+            return View(await bookTokContext.ToListAsync());
         }
 
         // GET: Sale/Details/5
@@ -35,6 +35,8 @@ namespace BookTok.Controllers
             }
 
             var sale = await _context.Sale
+                .Include(s => s.Book)
+                .Include(s => s.Costumer)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (sale == null)
             {
@@ -47,6 +49,8 @@ namespace BookTok.Controllers
         // GET: Sale/Create
         public IActionResult Create()
         {
+            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title");
+            ViewData["CostumerId"] = new SelectList(_context.Costumer, "Id", "Name");
             return View();
         }
 
@@ -57,12 +61,24 @@ namespace BookTok.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CostumerId,BookId")] Sale sale)
         {
+
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            foreach (var error in errors){
+                Console.WriteLine(error.ErrorMessage);
+            }
+
+            Console.WriteLine(Convert.ToString(sale.CostumerId));
+            Console.WriteLine(Convert.ToString(sale.BookId));
+            Console.WriteLine(Convert.ToString(sale.Id));
+            Console.WriteLine(ModelState.IsValid);
             if (ModelState.IsValid)
             {
                 _context.Add(sale);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title", sale.BookId);
+            ViewData["CostumerId"] = new SelectList(_context.Costumer, "Id", "Name", sale.CostumerId);
             return View(sale);
         }
 
@@ -79,6 +95,8 @@ namespace BookTok.Controllers
             {
                 return NotFound();
             }
+            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title", sale.BookId);
+            ViewData["CostumerId"] = new SelectList(_context.Costumer, "Id", "Name", sale.CostumerId);
             return View(sale);
         }
 
@@ -87,7 +105,7 @@ namespace BookTok.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount")] Sale sale)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CostumerId,BookId")] Sale sale)
         {
             if (id != sale.Id)
             {
@@ -114,6 +132,8 @@ namespace BookTok.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title", sale.BookId);
+            ViewData["CostumerId"] = new SelectList(_context.Costumer, "Id", "Name", sale.CostumerId);
             return View(sale);
         }
 
@@ -126,6 +146,8 @@ namespace BookTok.Controllers
             }
 
             var sale = await _context.Sale
+                .Include(s => s.Book)
+                .Include(s => s.Costumer)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (sale == null)
             {
