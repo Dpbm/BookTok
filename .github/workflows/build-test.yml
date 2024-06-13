@@ -23,10 +23,9 @@ jobs:
     needs: setup
 
     steps:
-      - name: Install Dependencies
-        working-directory: BookTok
-        run: chmod +x ./install-dependencies.sh && ./install-dependencies.sh  
+      - name: Install Dependencies and build
+        run: ls -la 
 
-      - name: Build
-        working-directory: BookTok
-        run: dotnet build
+      - run: chmod +x ./install-dependencies.sh && \
+             ./install-dependencies.sh && \
+             dotnet build
