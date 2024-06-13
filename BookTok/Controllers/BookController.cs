@@ -31,8 +31,11 @@ namespace BookTok.Controllers
         [HttpGet("/Reviews/{id}")]
         public async Task<IActionResult> Reviews(int id)
         {
-            _reviews.getBookReviews(id);
-            return View();
+            IEnumerable<Review> reviews = await _reviews.getBookReviews(id);
+            foreach(Review review in reviews){
+                review.Costumer = await _context.Costumer.FirstOrDefaultAsync(m => m.Id == review.CostumerId);
+            }
+            return View(reviews);
         }
 
         // GET: Book/Details/5

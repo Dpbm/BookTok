@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookTokApi.Data;
 using BookTokApi.Models;
-using System.Collections;
 
 namespace BookTokApi.Controllers
 {
@@ -29,23 +28,9 @@ namespace BookTokApi.Controllers
             return await _context.Reviews.ToListAsync();
         }
 
-        // GET: api/Reviews/Book/5
-        [HttpGet("Book/{id}")]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReview(int id)
-        {
-            var reviews = await _context.Reviews.Where(x => x.BookId == id).ToListAsync();
-
-            if (reviews == null || reviews.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return reviews;
-        }
-
         // GET: api/Reviews/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Review>> GetReviewByBookId(int id)
+        public async Task<ActionResult<Review>> GetReview(int id)
         {
             var review = await _context.Reviews.FindAsync(id);
 
@@ -56,7 +41,6 @@ namespace BookTokApi.Controllers
 
             return review;
         }
-
 
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -114,6 +98,20 @@ namespace BookTokApi.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+         // GET: api/Reviews/Book/5
+        [HttpGet("Book/{id}")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewByBook(int id)
+        {
+            var reviews = await _context.Reviews.Where(x => x.BookId == id).ToListAsync();
+
+            if (reviews == null || reviews.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return reviews;
         }
 
         private bool ReviewExists(int id)

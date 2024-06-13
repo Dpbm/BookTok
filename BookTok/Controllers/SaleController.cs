@@ -61,16 +61,6 @@ namespace BookTok.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CostumerId,BookId")] Sale sale)
         {
-
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-            foreach (var error in errors){
-                Console.WriteLine(error.ErrorMessage);
-            }
-
-            Console.WriteLine(Convert.ToString(sale.CostumerId));
-            Console.WriteLine(Convert.ToString(sale.BookId));
-            Console.WriteLine(Convert.ToString(sale.Id));
-            Console.WriteLine(ModelState.IsValid);
             if (ModelState.IsValid)
             {
                 _context.Add(sale);

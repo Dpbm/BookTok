@@ -16,14 +16,12 @@ public class Reviews{
     }
 
     public async Task<IEnumerable<Review>> getBookReviews(int id){
-        Console.WriteLine("Opa " + id);
         try{
             HttpResponseMessage response = await _client.GetAsync("Reviews/Book/"+id);
 
             response.EnsureSuccessStatusCode();
 
             List<Review> data = await response.Content.ReadAsAsync<List<Review>>();
-
 
             foreach (Review review in data){
                 Console.WriteLine(review.ReviewText);

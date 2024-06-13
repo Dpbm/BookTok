@@ -8,9 +8,9 @@ public class Review
 
     public int Rating {get;set;}
 
-    public long Date {get;set;}
+    public String Date {get;set;}
 
     public int CostumerId {get;set;}
 
-
+    public virtual Costumer Costumer {get; set;}
 }

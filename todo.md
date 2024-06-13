@@ -18,7 +18,13 @@
 - [x] use http request to communicate with the api 
 - [x] use dotenv
 
+- [x] list reviews by book
+- [ ] add review
+- [ ] remove review
+- [ ] update review
+- [ ] fix frontend (review text too large)
+
 ## API
 - [x] set base url
 - [x] use dotenv
-- [ ] add get by book id
+- [x] add get by book id
