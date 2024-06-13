@@ -1,0 +1,32 @@
+name: Build Test
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Ubuntu Dependencies
+        run: chmod +x ./setup-ubuntu.sh && ./setup-ubuntu.sh
+      
+      - name: Dotnet version
+        run: dotnet --version
+
+  mvc-core:
+    runs-on: ubuntu-22.04
+    needs: setup
+
+    steps:
+      - name: Install Dependencies
+        working-directory: BookTok
+        run: chmod +x ./install-dependencies.sh && ./install-dependencies.sh  
+
+      - name: Build
+        working-directory: BookTok
+        run: dotnet build
