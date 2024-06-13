@@ -2,15 +2,15 @@
 
 echo "Installing system dependencies..."
 
-apt update && apt upgrade -y
-apt install -y wget software-properties-common
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y wget software-properties-common
 
 wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-dpkg -i packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
-apt update
+sudo apt update
 
-apt install -y dotnet-sdk-8.0 \
+sudo apt install -y dotnet-sdk-8.0 \
                     aspnetcore-runtime-8.0 \
                     dotnet-runtime-8.0 \
                     ca-certificates \
@@ -26,6 +26,9 @@ apt install -y dotnet-sdk-8.0 \
                     libunwind8 \
                     zlib1g \
                     curl \
-                    jq
-apt autoremove
+                    jq \
+                    liblttng-ust1 \
+                    libssl3 \
+                    libicu70 
+sudo apt autoremove -y
 
