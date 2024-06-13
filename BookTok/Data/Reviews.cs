@@ -25,10 +25,6 @@ public class Reviews{
 
             List<Review> data = await response.Content.ReadAsAsync<List<Review>>();
 
-            foreach (Review review in data){
-                Console.WriteLine(review.ReviewText);
-            }
-
             return data;
 
         }catch(HttpRequestException e){
@@ -39,7 +35,7 @@ public class Reviews{
         
     }
 
-    public async Task AddReview(Review review){
+    public async Task addReview(Review review){
          try{
 
             using StringContent jsonContent = new(
@@ -58,5 +54,35 @@ public class Reviews{
             Console.WriteLine("HTTP POST request FAILED!!");
             Console.WriteLine(e.Message);
         }
+    }
+
+    public async Task<Review> getReview(int? id){
+        try{
+            HttpResponseMessage response = await _client.GetAsync("Reviews/"+id);
+
+            response.EnsureSuccessStatusCode();
+
+            Review data = await response.Content.ReadAsAsync<Review>();
+
+            return data;
+
+        }catch(HttpRequestException e){
+            Console.WriteLine("HTTP GET request FAILED!!");
+            Console.WriteLine(e.Message);
+            return null;
+        }
+        
+    }
+
+    public async Task deleteReview(int id){
+        try{
+            HttpResponseMessage response = await _client.DeleteAsync("Reviews/"+id);
+            response.EnsureSuccessStatusCode();
+
+        }catch(HttpRequestException e){
+            Console.WriteLine("HTTP DELETE request FAILED!!");
+            Console.WriteLine(e.Message);
+        }
+        
     }
 }

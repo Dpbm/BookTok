@@ -78,7 +78,7 @@ namespace BookTok.Controllers
             {
                 review.BookId = id;
                 
-                await _reviews.AddReview(review);
+                await _reviews.addReview(review);
                 return RedirectToAction(nameof(Reviews), new {id=id});
             
             }
@@ -153,6 +153,45 @@ namespace BookTok.Controllers
             }
             return View(book);
         }
+
+        // GET: Book/DeleteReview/5
+        public async Task<IActionResult> DeleteReview(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var review = await _reviews.getReview(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            review.Costumer = await _context.Costumer
+                .FirstOrDefaultAsync(m => m.Id == review.CostumerId);
+            review.Book = await _context.Book
+                .FirstOrDefaultAsync(m => m.Id == review.BookId);
+
+
+            return View(review);
+        }
+
+        // POST: Book/DeleteReview/5
+        [HttpPost, ActionName("DeleteReview")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteReview(int id)
+        {
+            var review = await _reviews.getReview(id);
+            if (review != null)
+            {
+                await _reviews.deleteReview(id);
+            }
+
+            return RedirectToAction(nameof(Reviews), new {id=review.BookId});
+        }
+
+
 
         // GET: Book/Delete/5
         public async Task<IActionResult> Delete(int? id)

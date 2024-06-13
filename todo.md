@@ -20,10 +20,10 @@
 
 - [x] list reviews by book
 - [x] add review
-- [ ] remove review
+- [x] remove review
 - [ ] update review
 - [ ] fix frontend (review text too large)
-- [ ] add `Review` model data constraints
+- [x] add `Review` model data constraints
 
 ## API
 - [x] set base url

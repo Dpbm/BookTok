@@ -25,4 +25,5 @@ public class Review
     public int BookId {get;set;}
 
     public virtual Costumer Costumer {get; set;}
+    public virtual Book Book {get; set;}
 }
