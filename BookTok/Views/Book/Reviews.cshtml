@@ -5,7 +5,7 @@
 }
 
 <p>
-    <a asp-action="">Create New Review</a>
+    <a asp-action="AddReview" asp-route-id='@Url.ActionContext.RouteData.Values["id"]'>Create New Review</a>
 </p>
 <table class="table">
     <thead>

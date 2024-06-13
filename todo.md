@@ -19,10 +19,11 @@
 - [x] use dotenv
 
 - [x] list reviews by book
-- [ ] add review
+- [x] add review
 - [ ] remove review
 - [ ] update review
 - [ ] fix frontend (review text too large)
+- [ ] add `Review` model data constraints
 
 ## API
 - [x] set base url

@@ -62,6 +62,31 @@ namespace BookTok.Controllers
             return View();
         }
 
+        // GET: Book/AddReview/5
+        public IActionResult AddReview(int id)
+        {
+            ViewData["CostumerId"] = new SelectList(_context.Costumer, "Id", "Name");
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReview([Bind("ReviewText,Rating,Date,CostumerId")] Review review, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                review.BookId = id;
+                
+                await _reviews.AddReview(review);
+                return RedirectToAction(nameof(Reviews), new {id=id});
+            
+            }
+
+            ViewData["CostumerId"] = new SelectList(_context.Costumer, "Id", "Name");
+            return View(review);
+        }
+
         // POST: Book/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

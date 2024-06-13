@@ -3,6 +3,8 @@ namespace BookTok.Data;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Text;
 using BookTok.Models;
 
 public class Reviews{
@@ -35,5 +37,26 @@ public class Reviews{
             return new List<Review>();
         }
         
+    }
+
+    public async Task AddReview(Review review){
+         try{
+
+            using StringContent jsonContent = new(
+                JsonSerializer.Serialize(review),
+                Encoding.UTF8,
+                "application/json");
+
+
+            using HttpResponseMessage response = await _client.PostAsync(
+                "Reviews",
+                jsonContent);
+
+            response.EnsureSuccessStatusCode();
+            
+        }catch(HttpRequestException e){
+            Console.WriteLine("HTTP POST request FAILED!!");
+            Console.WriteLine(e.Message);
+        }
     }
 }
