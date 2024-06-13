@@ -36,7 +36,7 @@ public class Reviews{
     }
 
     public async Task addReview(Review review){
-         try{
+        try{
 
             using StringContent jsonContent = new(
                 JsonSerializer.Serialize(review),
@@ -81,6 +81,28 @@ public class Reviews{
 
         }catch(HttpRequestException e){
             Console.WriteLine("HTTP DELETE request FAILED!!");
+            Console.WriteLine(e.Message);
+        }
+        
+    }
+
+    public async Task updateReview(Review review){
+        try{
+
+            using StringContent jsonContent = new(
+                JsonSerializer.Serialize(review),
+                Encoding.UTF8,
+                "application/json");
+
+
+            using HttpResponseMessage response = await _client.PutAsync(
+                "Reviews/"+review.Id,
+                jsonContent);
+
+            response.EnsureSuccessStatusCode();
+            
+        }catch(HttpRequestException e){
+            Console.WriteLine("HTTP PUT request FAILED!!");
             Console.WriteLine(e.Message);
         }
         

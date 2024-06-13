@@ -27,7 +27,7 @@
 - [x] list reviews by book
 - [x] add review
 - [x] remove review
-- [ ] update review
+- [x] update review
 - [x] details page for reviews
 - [x] add `Review` model data constraints
 

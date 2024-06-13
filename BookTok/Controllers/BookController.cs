@@ -143,6 +143,42 @@ namespace BookTok.Controllers
             return View(book);
         }
 
+        // GET: Book/EditReview/5
+        public async Task<IActionResult> EditReview(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var review = await _reviews.getReview(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+            return View(review);
+        }
+
+        // POST: Book/EditReview/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditReview(int id, [Bind("Id,BookId,CostumerId,ReviewText,Rating,Date")] Review review)
+        {
+            if (id != review.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _reviews.updateReview(review);
+                return RedirectToAction(nameof(Reviews), new{id=review.BookId});
+            }
+            return View(review);
+        }
+
         // POST: Book/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
