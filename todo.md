@@ -1,5 +1,11 @@
 # TODO
 
+## PLUS
+
+- [ ] bazel to build all
+- [ ] github actions
+- [ ] github pages [or vercel]
+
 ## Core
 - [x] remove `Home` link
 - [x] update all `Sales` routes
@@ -22,7 +28,7 @@
 - [x] add review
 - [x] remove review
 - [ ] update review
-- [ ] fix frontend (review text too large)
+- [x] details page for reviews
 - [x] add `Review` model data constraints
 
 ## API

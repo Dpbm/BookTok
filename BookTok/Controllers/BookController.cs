@@ -38,6 +38,30 @@ namespace BookTok.Controllers
             return View(reviews);
         }
 
+        // GET: Book/DetailsReview/5
+        public async Task<IActionResult> DetailsReview(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var review = await _reviews.getReview(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            review.Costumer = await _context.Costumer
+                .FirstOrDefaultAsync(m => m.Id == review.CostumerId);
+            review.Book = await _context.Book
+                .FirstOrDefaultAsync(m => m.Id == review.BookId);
+
+
+            return View(review);
+        }
+
+
         // GET: Book/Details/5
         public async Task<IActionResult> Details(int? id)
         {
