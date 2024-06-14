@@ -6,6 +6,7 @@ on:
 
 env:
     REGISTRY: ghcr.io
+    IMAGE_NAME: ${{ github.repository }}
     USERNAME: ${{ github.actor }}
 
 jobs:
@@ -30,8 +31,8 @@ jobs:
               uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
               with:
                   tags: |
-                      type=raw,value=latest
-                  images: ${{ env.REGISTRY }}/booktok
+                      type=raw,value=mvc
+                  images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
             - name: Build and push Docker BookTok image
               uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
@@ -47,8 +48,8 @@ jobs:
               uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
               with:
                 tags: |
-                      type=raw,value=latest
-                images: ${{ env.REGISTRY }}/booktokapi
+                      type=raw,value=api
+                images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
     
             - name: Build and push Docker BookTokApi image
               uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
