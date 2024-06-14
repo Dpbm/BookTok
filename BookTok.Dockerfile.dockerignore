@@ -1,0 +1,5 @@
+BookTok/bin
+BookTok/obj
+BookTok/out
+BookTok/.env*
+BookTok/*.sh

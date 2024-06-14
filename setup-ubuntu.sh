@@ -1,15 +1,16 @@
 #!/bin/sh
 
 echo "Installing system dependencies..."
-
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y wget software-properties-common
 
+echo "Adding microsoft repository..."
 wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 sudo apt update
 
+echo "Installing dotnet8.0..."
 sudo apt install -y dotnet-sdk-8.0 \
                     aspnetcore-runtime-8.0 \
                     dotnet-runtime-8.0 \

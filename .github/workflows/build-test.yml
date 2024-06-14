@@ -36,8 +36,8 @@ jobs:
 
   api:
     runs-on: ubuntu-22.04
+    container: ubuntu
     needs: setup
-
 
     steps:
       - uses: actions/checkout@v4
