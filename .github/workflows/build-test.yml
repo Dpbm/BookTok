@@ -24,13 +24,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
-      - run: cd ./BookTok
 
-      - name: Intall Dependencies
+      - name: Install Dependencies
+        working-directory: BookTok
         run: chmod +x ./install-dependencies.sh && ./install-dependencies.sh
 
       - name: Build
+        working-directory: BookTok
         run: dotnet build
 
 
@@ -38,21 +38,24 @@ jobs:
     runs-on: ubuntu-22.04
     needs: setup
 
+
     steps:
       - uses: actions/checkout@v4
-      
-      - run: cd ./BookTokApi
 
-      - name: Intall Dependencies
+      - name: Install Dependencies
+        working-directory: BookTokApi
         run: chmod +x ./install-dependencies.sh && ./install-dependencies.sh
 
       - name: Build
+        working-directory: BookTokApi
         run: dotnet build
-
+      
       - name: Run Project
+        working-directory: BookTokApi
         run: nohup dotnet run > /dev/null 2>&1 &
 
       - name: Test Endpoints
+        working-directory: BookTokApi
         run: chmod +x test-endpoints.sh && ./test-endpoints.sh
 
         
