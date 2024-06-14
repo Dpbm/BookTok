@@ -1,0 +1,57 @@
+name: Publish Docker image (DockerHub)
+
+on:
+    push:
+        branches: ['main']
+
+env:
+    NAMESPACE: ${{ secrets.DOCKERHUB_NAMESPACE }}
+
+jobs:
+    build-and-push-image-dockerhub:
+        name: Push Docker image to Docker Hub
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out the repo
+              uses: actions/checkout@v4
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+
+            - name: Extract metadata (tags, labels) for Docker (booktok image)
+              id: meta-booktok
+              uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+              with:
+                  tags: |
+                      type=raw,value=latest
+                  images: ${{ env.NAMESPACE }}/booktok
+
+            - name: Build and push Docker Booktok image
+              uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+              with:
+                  context: ./BookTok/
+                  file: ../BookTok.Dockerfile
+                  push: true
+                  tags: ${{ steps.meta-booktok.outputs.tags }}
+                  labels: ${{ steps.meta-booktok.outputs.labels }}
+
+            - name: Extract metadata (tags, labels) for Docker (booktokapi image)
+              id: meta-booktokapi
+              uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+              with:
+                tags: |
+                      type=raw,value=latest
+                images: ${{ env.NAMESPACE }}/booktokapi
+
+            - name: Build and push Docker Booktok image
+              uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+              with:
+                context: ./BookTokApi/
+                file: ../BookTokApi.Dockerfile
+                push: true
+                tags: ${{ steps.meta-booktokapi.outputs.tags }}
+                labels: ${{ steps.meta-booktokapi.outputs.labels }}
+

@@ -1,0 +1,60 @@
+name: Publish Docker image (GHRC)
+
+on:
+    push:
+        branches: ['main']
+
+env:
+    REGISTRY: ghcr.io
+    USERNAME: ${{ github.actor }}
+
+jobs:
+    build-and-push-image-GHRC:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Log in to the Container registry
+              uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+              with:
+                  registry: ${{ env.REGISTRY }}
+                  username: ${{ env.USERNAME }}
+                  password: ${{ secrets.TOKEN }}
+
+            - name: Extract metadata (tags, labels) for Docker (booktok image)
+              id: meta-booktok
+              uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+              with:
+                  tags: |
+                      type=raw,value=latest
+                  images: ${{ env.REGISTRY }}/booktok
+
+            - name: Build and push Docker BookTok image
+              uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+              with:
+                  context: ./BookTok/
+                  file: ../BookTok.Dockerfile
+                  push: true
+                  tags: ${{ steps.meta-booktok.outputs.tags }}
+                  labels: ${{ steps.meta-booktok.outputs.labels }}
+
+            - name: Extract metadata (tags, labels) for Docker (booktokapi image)
+              id: meta-booktokapi
+              uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+              with:
+                tags: |
+                      type=raw,value=latest
+                images: ${{ env.REGISTRY }}/booktokapi
+    
+            - name: Build and push Docker BookTokApi image
+              uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+              with:
+                context: ./BookTokApi/
+                file: ../BookTokApi.Dockerfile
+                push: true
+                tags: ${{ steps.meta-booktokapi.outputs.tags }}
+                labels: ${{ steps.meta-booktokapi.outputs.labels }}
