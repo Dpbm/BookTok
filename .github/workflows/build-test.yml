@@ -23,9 +23,7 @@ jobs:
     needs: setup
 
     steps:
-      - name: Install Dependencies and build
-        run: ls -la 
+      - uses: actions/checkout@v4
+      - name: Run mvc Script
+        run: chmod +x ./workflow-run-booktok.sh && ./workflow-run-booktok.sh 
 
-      - run: chmod +x ./install-dependencies.sh && \
-             ./install-dependencies.sh && \
-             dotnet build
