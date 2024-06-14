@@ -24,6 +24,36 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Run mvc Script
-        run: chmod +x ./workflow-run-booktok.sh && ./workflow-run-booktok.sh 
+      
+      - run: cd ./BookTok
+
+      - name: Intall Dependencies
+        run: chmod +x ./install-dependencies.sh && ./install-dependencies.sh
+
+      - name: Build
+        run: dotnet build
+
+
+  api:
+    runs-on: ubuntu-22.04
+    needs: setup
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - run: cd ./BookTokApi
+
+      - name: Intall Dependencies
+        run: chmod +x ./install-dependencies.sh && ./install-dependencies.sh
+
+      - name: Build
+        run: dotnet build
+
+      - name: Run Project
+        run: nohup dotnet run > /dev/null 2>&1 &
+
+      - name: Test Endpoints
+        run: chmod +x test-endpoints.sh && ./test-endpoints.sh
+
+        
 
