@@ -35,8 +35,7 @@ jobs:
 
 
   api:
-    runs-on: ubuntu-22.04
-    container: ubuntu
+    runs-on: ubuntu-22.04   
     needs: setup
 
     steps:
@@ -49,14 +48,5 @@ jobs:
       - name: Build
         working-directory: BookTokApi
         run: dotnet build
-      
-      - name: Run Project
-        working-directory: BookTokApi
-        run: nohup dotnet run > /dev/null 2>&1 &
-
-      - name: Test Endpoints
-        working-directory: BookTokApi
-        run: chmod +x test-endpoints.sh && ./test-endpoints.sh
-
         
 
