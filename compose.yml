@@ -1,0 +1,16 @@
+services:
+  mvc:
+    build: 
+      context: ./BookTok/
+      dockerfile: ../BookTok.Dockerfile
+    environment:
+      API_BASE_URL: "http://localhost:3000/api/"
+    ports:
+      - 8080:8080
+
+  api:
+    build:
+      context: ./BookTokApi/
+      dockerfile: ../BookTokApi.Dockerfile
+    ports:
+      - 3000:3000
