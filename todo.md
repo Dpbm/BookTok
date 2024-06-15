@@ -2,9 +2,8 @@
 
 ## PLUS
 
-- [ ] bazel to build all
-- [ ] github actions
-- [ ] github pages [or vercel]
+- [x] github actions
+- [x] github pages [or vercel]
 
 ## Core
 - [x] remove `Home` link
