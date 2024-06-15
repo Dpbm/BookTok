@@ -1,5 +1,10 @@
 # BookTok
 
+
+![Build-Test](https://github.com/Dpbm/BookTok/actions/workflows/build-test.yml/badge.svg)
+![Docker Hub](https://github.com/Dpbm/BookTok/actions/workflows/dockerhub.yml/badge.svg)
+![GHRC](https://github.com/Dpbm/BookTok/actions/workflows/ghrc.yml/badge.svg)
+
 A simple bookstore application to our systems development class final assignment.
 
 ## How does it works
