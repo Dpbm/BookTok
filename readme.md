@@ -7,7 +7,7 @@
 
 A simple bookstore application to our systems development class final assignment.
 
-## How does it works
+## How does it work?
 
 The project is made of an api and a mvc core. The former is a webapi .net application running at the port `3000`. This the part committed to handle the books reviews data storing them into a in memory database provided by the microsoft Entity framework. The latter, is a monolitic mvc app created to handle all the remaining data, such as costumers, books and sales, following the default architecture provided by the .net framework.\
 To join them together, we're are using http requests pointing to our api, so every time that a review related action is required by the cliente, a request is send and then the json response is treated by the client.   
