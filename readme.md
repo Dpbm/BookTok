@@ -93,6 +93,10 @@ If you prefer, a docker compose file is available as well:
 docker compose up -d
 ```
 
+# Demonstration
+
+[![video](https://img.youtube.com/vi/jeb19feikwE/0.jpg)](https://youtu.be/jeb19feikwE)
+
 
 ## Group
 
